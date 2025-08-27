@@ -1,0 +1,25 @@
+site_name: 我的文档
+site_author: MonkeyIU
+site_description: MkDocs + Material 示例
+theme:
+  name: material
+  palette:
+    scheme: slate  # 可以选 default, slate, etc.
+    primary: indigo
+    accent: indigo
+  font:
+    text: Roboto
+    code: Roboto Mono
+#  logo: images/logo.png   # 可选：站点logo
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/MonkeyIU
+plugins:
+  - search                # 内置搜索插件
+  - minify                # 压缩 HTML
+  - mermaid2              # 支持 mermaid 流程图
+  - git-revision-date:     # 显示最后修改时间
+    enabled: true
+    type: datetime
+    fallback_to_build_date: true
