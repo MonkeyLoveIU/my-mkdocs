@@ -20,6 +20,7 @@ jobs:
       - run: |
           pip install mkdocs
           pip install mkdocs-material
+          pip install mkdocs-git-revision-date-localized-plugin
           pip install mkdocs-minify-plugin mkdocs-mermaid2-plugin mkdocs-git-revision-date-plugin
 
       - name: Deploy to GitHub Pages
