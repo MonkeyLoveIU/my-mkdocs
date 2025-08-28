@@ -3,27 +3,26 @@ name: ci
 on:
   push:
     branches:
-      - master
       - main
+      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ 检出仓库代码
       - uses: actions/checkout@v3
 
-      # 2️⃣ 设置 Python 环境
       - uses: actions/setup-python@v4
         with:
           python-version: 3.x
 
-      # 3️⃣ 安装 MkDocs、Material 主题和所需插件
       - run: |
           pip install mkdocs
           pip install mkdocs-material
           pip install mkdocs-minify-plugin mkdocs-mermaid2-plugin mkdocs-git-revision-date-plugin
 
-      # 4️⃣ 部署到 GitHub Pages
-      - run: mkdocs gh-deploy --force
+      - name: Deploy to GitHub Pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: mkdocs gh-deploy --force
