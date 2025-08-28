@@ -26,3 +26,10 @@ jobs:
 
       - name: Deploy
         run: mkdocs gh-deploy --force --clean
+
+      - name: Install MkDocs plugins
+        run: |
+          pip install mkdocs-minify-plugin
+          pip install mkdocs-mermaid2-plugin
+          pip install mkdocs-git-revision-date-plugin
+          pip install mkdocs-git-revision-date-localized-plugin
