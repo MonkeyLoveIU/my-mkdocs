@@ -1,27 +1,165 @@
-site_name: 我的文档
-site_author: MonkeyIU
-site_description: MkDocs + Material 示例 
+site_name: 我的站点  # 设置网站标题，会显示在导航栏和浏览器标签上
 
-theme: 
-  name: material 
-  palette:
-    scheme: slate
-    primary: indigo
-    accent: indigo
-  font:
-    text: Roboto
-    code: Roboto Mono
+theme:                   # 主题相关设置
+  name: material         # 使用 "Material for MkDocs" 主题
+  language: zh           # 设置语言为中文
+  features:              # 启用的功能特性
+    - search.suggest         # 搜索时自动补全建议
+    - search.highlight       # 搜索结果高亮显示
+    - navigation.instant     # 页面切换时只加载内容，提升速度
+    - navigation.expand      # 左侧导航默认展开
+    - navigation.top         # 添加返回顶部的按钮
+    - navigation.tabs        # 启用顶部标签页式导航
+    - content.code.annotate  # 支持代码注释标注
+    - content.code.copy      # 在代码块添加复制按钮
+    - content.code.select    # 支持一键全选代码
+    - content.code.expand    # 支持折叠/展开长代码
+    - content.code.highlight # 代码行高亮
+    - content.code.wrap      # 代码自动换行
+    - content.code.copy_button  # 显示复制按钮（旧写法，和上面作用类似）
+    - content.code.fence_mermaid # 支持在 Markdown 中渲染 mermaid 图表
+    - toc.integrate          # 将目录集成到侧边栏
+    - search.highlight       # 搜索结果高亮（重复配置，但不影响）
+    - search.suggest         # 搜索提示（重复配置，但不影响）
+  palette:                 # 颜色方案
 
-extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/MonkeyIU
 
-plugins:
-  - search
-  - minify
-  - mermaid2
-  - git-revision-date-localized:
-      enable_creation_date: true
-      fallback_to_build_date: true
-      type: datetime
+    - scheme: slate         # 黑金主题（科技感、酷炫）
+      primary: black
+      accent: amber
+    - scheme: slate         # 深色主题
+      primary: indigo       # 主色为靛蓝色
+      accent: indigo        # 强调色为靛蓝色
+    - scheme: default       # 默认主题（浅色模式）
+      primary: indigo       # 主色为靛蓝色
+      accent: indigo        # 强调色为靛蓝色
+      toggle:               # 配置浅色/深色切换按钮
+        icon: material/weather-night  # 切换按钮的图标（月亮）
+        name: 深色模式                 # 切换按钮的提示文字
+  font:                    # 字体配置
+    text: Noto Sans         # 正文字体
+    code: Fira Code         # 代码字体
+
+
+extra_javascript:           # 额外引入的 JS 脚本
+  - javascripts/mathjax.js  # 本地 MathJax 配置文件
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js  # 在线加载 MathJax 库
+
+
+plugins:                  # 插件配置
+  - search                # 搜索功能插件
+  - git-revision-date-localized:   # 显示页面最后修改时间
+      fallback_to_build_date: true # 如果没有 Git 提交记录则用构建日期
+      type: timeago                # 时间显示为“几分钟前”
+      locale: zh                   # 本地化为中文
+  - mermaid2              # 支持 mermaid 流程图/时序图
+  - minify:               # 压缩构建结果
+      minify_html: true   # 压缩 HTML
+  - awesome-pages         # 自动排序和组织导航
+
+
+markdown_extensions:       # Markdown 扩展
+  - admonition             # 提示块 (note, warning, tip 等)
+  - toc:                   # 自动生成目录
+      permalink: true      # 每个标题生成可点击的锚点链接
+  - codehilite             # 代码高亮
+  - footnotes              # 脚注支持
+  - meta                   # 页面级元数据支持
+  - attr_list              # 支持自定义属性 (如宽度、高度等)
+  - md_in_html             # 允许在 HTML 中写 Markdown
+
+  # pymdownx 系列扩展（增强版 Markdown）
+  - pymdownx.highlight     # 增强代码高亮
+  - pymdownx.inlinehilite  # 行内代码高亮
+  - pymdownx.details       # 可折叠块
+  - pymdownx.tabbed        # 标签页/选项卡
+  - pymdownx.tasklist      # 任务列表（复选框）
+  - pymdownx.emoji:        # emoji 支持（Material 主题优化）
+      emoji_index: !!python/name:materialx.emoji.twemoji
+  - pymdownx.arithmatex:   # 数学公式支持 (MathJax/KaTeX)
+      generic: true
+  - pymdownx.superfences:  # 高级代码块（支持多种嵌套，比如 mermaid）
+      custom_fences:       # 自定义代码块
+        - name: mermaid    # 名为 mermaid 的代码块
+          class: mermaid   # 添加 CSS 类名
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+
+extra_css:                 # 额外引入的 CSS 样式
+  - stylesheets/extra.css  # 本地自定义样式
+
+
+nav:                       # 导航栏配置
+  - 首页: index.md         # 首页链接到 index.md
+  - 指南:                  # 二级菜单 "指南"
+      - 使用说明: guide.md # "指南" 下的 "使用说明" 页面
+
+
+
+
+
+
+#site_name: 我的文档站
+#site_url: https://example.com
+#
+#theme:
+#  name: material
+#  language: zh
+#  features:
+#    - navigation.instant   # 页面无刷新切换
+#    - navigation.expand    # 侧边栏展开
+#    - navigation.top       # 顶部导航
+#    - content.code.copy    # 代码块复制按钮
+#    - content.code.annotate # 支持代码注释
+#    - toc.integrate        # TOC 集成在右侧边栏
+#    - search.highlight     # 搜索高亮
+#    - search.suggest       # 搜索提示
+#  palette:
+#    - scheme: default
+#      primary: indigo
+#      accent: indigo
+#    - scheme: slate
+#      primary: indigo
+#      accent: indigo
+#      toggle:
+#        icon: material/weather-night
+#        name: 深色模式
+#  font:
+#    text: Noto Sans
+#    code: Fira Code
+#
+#nav:
+#  - 首页: index.md
+#  - 指南:
+#      - 使用说明: guide.md
+#
+#plugins:
+#  - search
+#  - git-revision-date-localized:
+#      fallback_to_build_date: true
+#      type: timeago
+#      locale: zh
+#  - mermaid2
+#  - minify:
+#      minify_html: true
+#  - awesome-pages
+#
+#markdown_extensions:
+#  - admonition         # 提示框
+#  - codehilite         # 代码高亮
+#  - footnotes          # 脚注
+#  - meta               # 页面元数据
+#  - toc:
+#      permalink: true  # 目录锚点
+#  - pymdownx.arithmatex: # 数学公式
+#      generic: true
+#  - pymdownx.superfences
+#  - pymdownx.details
+#  - pymdownx.tasklist
+#  - pymdownx.emoji:
+#      emoji_index: !!python/name:materialx.emoji.twemoji
+#      emoji_generator: !!python/name:materialx.emoji.to_svg
+#
+#extra_javascript:
+#  - javascripts/mathjax.js
+#  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
